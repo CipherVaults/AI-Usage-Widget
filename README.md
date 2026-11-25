@@ -1,6 +1,16 @@
-# AI Usage Widget
+<p align="center">
+  <img src="assets/icon.png" alt="AI Usage Widget Icon" width="96" height="96" />
+</p>
 
-A lightweight, dark-mode Windows desktop widget that keeps your live AI subscription quotas visible at a glance—covering **OpenAI Codex**, **Google Antigravity**, and **Anthropic Claude** in one compact, always-on-top window.
+<h1 align="center">AI Usage Widget</h1>
+
+<p align="center">
+  A lightweight, dark-mode Windows desktop widget that keeps your live AI subscription quotas visible at a glance—covering <strong>OpenAI Codex</strong>, <strong>Google Antigravity</strong>, and <strong>Anthropic Claude</strong> in one compact, always-on-top window.
+</p>
+
+<p align="center">
+  <img src="assets/social-preview.png" alt="AI Usage Widget Preview" width="760" />
+</p>
 
 Stop getting blindsided mid-task by a 5-hour rolling cap or weekly limit. AI Usage Widget monitors all three tools locally, displays remaining quota gauges with color-coded thresholds and live reset countdowns, and stays quietly out of your way until you need it.
 
