@@ -1,0 +1,11 @@
+# Build outputs and local binaries
+release/
+*.exe
+*.sha256
+*.tmp
+
+# Local runtime settings
+*.settings.json
+
+# Design drafts
+Icon Options/
