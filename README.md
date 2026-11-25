@@ -116,6 +116,12 @@ Outputs are written to `release\` along with `.sha256` checksum files.
 
 ---
 
+## Credits
+
+Created by **Mohamed Sayed + Antigravity**.
+
+---
+
 ## License
 
 Released under the [MIT License](LICENSE).
