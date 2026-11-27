@@ -6,13 +6,10 @@ namespace AIUsageWidget
 {
     internal sealed class QuotaUpdates : IDisposable
     {
-        private static readonly TimeSpan NormalRefreshInterval = TimeSpan.FromMinutes(3);
-        private static readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromSeconds(15);
-        private static readonly TimeSpan ResetGraceDelay = TimeSpan.FromSeconds(5);
         private readonly Stopwatch clock = Stopwatch.StartNew();
         private readonly Func<Task<QuotaReading>> fetch;
         private readonly Action<QuotaReading> show;
-        private TimeSpan nextCheckAt;
+        private TimeSpan retryAt;
         private int retryDelaySeconds;
         private bool requesting;
         private bool disposed;
@@ -25,7 +22,7 @@ namespace AIUsageWidget
 
         public void Poll()
         {
-            if (!disposed && !requesting && clock.Elapsed >= nextCheckAt)
+            if (clock.Elapsed >= retryAt)
                 Refresh();
         }
 
@@ -44,12 +41,11 @@ namespace AIUsageWidget
                 if (reading != null && reading.Problem == null)
                 {
                     retryDelaySeconds = 0;
-                    nextCheckAt = clock.Elapsed + NextSuccessInterval(reading);
+                    retryAt = TimeSpan.Zero;
                 }
                 else
                 {
-                    retryDelaySeconds = Math.Min(60, Math.Max(5, retryDelaySeconds * 2));
-                    nextCheckAt = clock.Elapsed + TimeSpan.FromSeconds(retryDelaySeconds);
+                    DelayRetry();
                 }
                 if (reading != null)
                     show(reading);
@@ -57,10 +53,7 @@ namespace AIUsageWidget
             catch (Exception)
             {
                 if (!disposed)
-                {
-                    retryDelaySeconds = Math.Min(60, Math.Max(5, retryDelaySeconds * 2));
-                    nextCheckAt = clock.Elapsed + TimeSpan.FromSeconds(retryDelaySeconds);
-                }
+                    DelayRetry();
             }
             finally
             {
@@ -68,31 +61,10 @@ namespace AIUsageWidget
             }
         }
 
-        internal static TimeSpan NextSuccessInterval(QuotaReading reading)
+        private void DelayRetry()
         {
-            var interval = NormalRefreshInterval;
-            if (reading == null || reading.Pools == null)
-                return interval;
-
-            var now = DateTimeOffset.UtcNow;
-            foreach (var pool in reading.Pools)
-            {
-                if (pool == null || pool.Windows == null)
-                    continue;
-                foreach (var window in pool.Windows)
-                {
-                    if (window == null || !window.Reset.HasValue)
-                        continue;
-                    var untilReset = window.Reset.Value - now;
-                    if (untilReset > TimeSpan.Zero)
-                    {
-                        var candidate = untilReset + ResetGraceDelay;
-                        if (candidate < interval)
-                            interval = candidate;
-                    }
-                }
-            }
-            return interval < MinimumRefreshInterval ? MinimumRefreshInterval : interval;
+            retryDelaySeconds = Math.Min(60, Math.Max(5, retryDelaySeconds * 2));
+            retryAt = clock.Elapsed + TimeSpan.FromSeconds(retryDelaySeconds);
         }
 
         public void Dispose()
