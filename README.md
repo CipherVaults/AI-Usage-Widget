@@ -24,8 +24,8 @@ Stop getting blindsided mid-task by a 5-hour rolling cap or weekly limit. AI Usa
   - **Claude:** Reads 5-hour session, weekly all-models, and model-scoped limits (e.g., Sonnet/Opus) via Claude Code `/usage` (with automatic fallback to your local `.claude.json` cache when offline).
 - **Live Reset Countdowns & Visual Warnings**
   - Color-coded progress bars (accent → amber at ≤ 25% → red at ≤ 10%) with per-window countdown timers and exact local reset timestamps on hover.
-- **One-Second Quota Refresh**
-  - Checks each provider every second, including while the widget is in the tray. Each provider has one request in flight at a time, and failed checks retry with exponential backoff (`5s`–`60s`). Use the Refresh button or `F5` to retry immediately.
+- **Two-Second Quota Refresh**
+  - Checks each provider and updates the countdowns every two seconds, including while the widget is in the tray. Each provider has one request in flight at a time, and failed checks retry with exponential backoff (`5s`–`60s`). Use the Refresh button or `F5` to retry immediately.
 - **Unobtrusive Desktop UX**
   - Frameless dark-mode UI with drag-to-move, pin always-on-top, collapsible provider cards, resizable dimensions with **Fit height to content**, **Close to tray**, single-instance restore on relaunch, and persistent window settings.
 - **Installer & Portable Editions**
@@ -40,16 +40,16 @@ Grab the latest release from [**Releases**](https://github.com/CipherVaults/AI-U
 
 | Edition | File | Best For |
 | :--- | :--- | :--- |
-| **Windows Installer** | `AI.Usage.Widget.Setup.v1.0.2.exe` | Standard per-user install (`%LOCALAPPDATA%\Programs\AI Usage Widget`) with Start Menu shortcut & clean uninstall/upgrade. |
-| **Portable** | `AI.Usage.Widget.Portable.v1.0.2.exe` | Zero-install single executable; stores settings alongside the `.exe` in `AI Usage Widget.settings.json`. |
+| **Windows Installer** | `AI.Usage.Widget.Setup.v1.0.3.exe` | Standard per-user install (`%LOCALAPPDATA%\Programs\AI Usage Widget`) with Start Menu shortcut & clean uninstall/upgrade. |
+| **Portable** | `AI.Usage.Widget.Portable.v1.0.3.exe` | Zero-install single executable; stores settings alongside the `.exe` in `AI Usage Widget.settings.json`. |
 
 ### Verify Download Integrity (SHA-256)
 
 Every release includes `.sha256` checksum files. Verify in PowerShell:
 
 ```powershell
-Get-FileHash ".\AI.Usage.Widget.Portable.v1.0.2.exe" -Algorithm SHA256
-Get-Content ".\AI.Usage.Widget.Portable.v1.0.2.exe.sha256"
+Get-FileHash ".\AI.Usage.Widget.Portable.v1.0.3.exe" -Algorithm SHA256
+Get-Content ".\AI.Usage.Widget.Portable.v1.0.3.exe.sha256"
 ```
 
 ---

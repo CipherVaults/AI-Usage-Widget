@@ -87,7 +87,7 @@ namespace AIUsageWidget
         private static readonly Brush Amber = BrushFrom("#D8AD78");
         private static readonly Brush Red = BrushFrom("#DE8E90");
         private static readonly FontFamily NumericFont = new FontFamily("Consolas");
-        private readonly DispatcherTimer clock = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        private readonly DispatcherTimer clock = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
         private readonly List<ResetLabel> resets = new List<ResetLabel>();
         private readonly ToggleButton pin;
         private readonly TextBlock status;
@@ -313,15 +313,17 @@ namespace AIUsageWidget
             if (reading.Pools != null && (card.Latest == null || reading.Updated >= card.Latest.Updated))
                 card.Latest = reading;
             card.Render(reading.Problem, resets);
-            UpdateResetLabels();
+            UpdateResetLabels(card);
             status.Text = "Checked " + DateTimeOffset.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
-        private void UpdateResetLabels()
+        private void UpdateResetLabels(ProviderCard card = null)
         {
             var now = DateTimeOffset.Now;
             foreach (var label in resets)
             {
+                if (card != null && label.Owner != card)
+                    continue;
                 var left = label.At - now;
                 string display;
                 if (left.TotalMinutes <= 0) display = "Reset due";
