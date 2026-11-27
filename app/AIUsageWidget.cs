@@ -22,8 +22,8 @@ using System.Windows.Threading;
 [assembly: AssemblyTitle("AI Usage Widget")]
 [assembly: AssemblyDescription("Desktop quota monitor for Codex, Google Antigravity, and Claude")]
 [assembly: AssemblyProduct("AI Usage Widget")]
-[assembly: AssemblyCompany("Mohamed Sayed + Antigravity")]
-[assembly: AssemblyCopyright("Copyright (c) 2026 Mohamed Sayed + Antigravity")]
+[assembly: AssemblyCompany("CipherVaults")]
+[assembly: AssemblyCopyright("Copyright (c) 2026 Mohamed Sayed")]
 [assembly: DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
 
 namespace AIUsageWidget
@@ -210,7 +210,8 @@ namespace AIUsageWidget
             {
                 var version = typeof(Widget).Assembly.GetName().Version.ToString(3);
                 MessageBox.Show(this,
-                    "AI Usage Widget v" + version + "\n\nCreated by Mohamed Sayed + Antigravity\nhttps://github.com/CipherVaults/AI-Usage-Widget",
+                    "AI Usage Widget v" + version + "\n\nCreated by Mohamed Sayed\nPublished by CipherVaults\n" +
+                    "Copyright (c) 2026 Mohamed Sayed\n\nhttps://github.com/CipherVaults/AI-Usage-Widget",
                     "About AI Usage Widget", MessageBoxButton.OK, MessageBoxImage.Information);
             };
             settingsMenu.Items.Add(aboutOption);

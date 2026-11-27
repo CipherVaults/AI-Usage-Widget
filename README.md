@@ -40,16 +40,16 @@ Grab the latest release from [**Releases**](https://github.com/CipherVaults/AI-U
 
 | Edition | File | Best For |
 | :--- | :--- | :--- |
-| **Windows Installer** | `AI.Usage.Widget.Setup.v1.0.1.exe` | Standard per-user install (`%LOCALAPPDATA%\Programs\AI Usage Widget`) with Start Menu shortcut & clean uninstall/upgrade. |
-| **Portable** | `AI.Usage.Widget.Portable.v1.0.1.exe` | Zero-install single executable; stores settings alongside the `.exe` in `AI Usage Widget.settings.json`. |
+| **Windows Installer** | `AI.Usage.Widget.Setup.v1.0.2.exe` | Standard per-user install (`%LOCALAPPDATA%\Programs\AI Usage Widget`) with Start Menu shortcut & clean uninstall/upgrade. |
+| **Portable** | `AI.Usage.Widget.Portable.v1.0.2.exe` | Zero-install single executable; stores settings alongside the `.exe` in `AI Usage Widget.settings.json`. |
 
 ### Verify Download Integrity (SHA-256)
 
 Every release includes `.sha256` checksum files. Verify in PowerShell:
 
 ```powershell
-Get-FileHash ".\AI.Usage.Widget.Portable.v1.0.1.exe" -Algorithm SHA256
-Get-Content ".\AI.Usage.Widget.Portable.v1.0.1.exe.sha256"
+Get-FileHash ".\AI.Usage.Widget.Portable.v1.0.2.exe" -Algorithm SHA256
+Get-Content ".\AI.Usage.Widget.Portable.v1.0.2.exe.sha256"
 ```
 
 ---
@@ -128,7 +128,9 @@ Outputs are written to `release\` along with `.sha256` checksum files.
 
 ## Credits
 
-Created by **Mohamed Sayed + Antigravity**.
+Created by **Mohamed Sayed** and published by **CipherVaults**.
+
+Copyright © 2026 Mohamed Sayed.
 
 ---
 
